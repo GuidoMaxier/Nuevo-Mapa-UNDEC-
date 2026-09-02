@@ -107,8 +107,14 @@
 
     <div class="encabezado-horarios">
         <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
-        <h1>Agenda <span>Semanal</span></h1>
-        <div class="subtitle">// HORARIOS DEL CUATRIMESTRE</div>
+        <h1>Agenda y <span>Calendario</span></h1>
+        <div class="subtitle">// HORARIOS Y FECHAS DEL CUATRIMESTRE</div>
+        
+        <div class="vista-selector">
+          <button class="btn-vista active" id="btnVistaAgenda" onclick="cambiarVistaHorarios('agenda')">Vista Semanal</button>
+          <button class="btn-vista" id="btnVistaCalendario" onclick="cambiarVistaHorarios('calendario')">Vista Calendario</button>
+        </div>
+
         <button class="boton-editar-horarios" id="botonEditarHorarios" onclick="abrirPanelEdicionHorarios()">
           ✎ Administrar Horarios
         </button>
@@ -136,15 +142,29 @@
             <div class="dia-contenido" data-dia="Viernes"></div>
         </div>
     </div>
+
+    <div id="vistaCalendario" style="display: none;">
+      <div class="calendario-header">
+        <button onclick="cambiarMes(-1)">◄</button>
+        <h2 id="calTituloMes">Mes Año</h2>
+        <button onclick="cambiarMes(1)">►</button>
+      </div>
+      <div class="calendario-dias-semana">
+        <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+      </div>
+      <div class="calendario-grid" id="calGridDias"></div>
+    </div>
   </div>
 
-  <!-- PANEL / MODAL PARA ADMINISTRAR Y EDITAR HORARIOS -->
   <div class="panel-edicion-overlay" id="overlayHorarios" onclick="cerrarPanelEdicionHorarios()"></div>
 
   <div class="panel-edicion-horarios" id="modalEdicionHorarios">
     <button class="close-btn" onclick="cerrarPanelEdicionHorarios()">✕</button>
 
-    <h2 id="tituloFormHorario">// AGREGAR NUEVA CLASE</h2>
+    <div class="tabs-admin">
+      <button class="tab-btn active" id="tabHorarios" onclick="cambiarTabAdmin('horarios')">Clases Semanales</button>
+      <button class="tab-btn" id="tabEvaluaciones" onclick="cambiarTabAdmin('evaluaciones')">Evaluaciones</button>
+    </div>
 
     <form id="formHorario" onsubmit="guardarHorario(event)">
         <input type="hidden" id="horarioEditIndex" value="-1">
@@ -194,13 +214,45 @@
         </div>
     </form>
 
+    <form id="formEvaluacion" onsubmit="guardarEvaluacion(event)" style="display: none;">
+        <div class="form-group">
+            <label>Materia</label>
+            <select id="selectMateriaEval" required></select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Tipo</label>
+                <select id="selectTipoEval" required>
+                    <option value="Parcial">Parcial</option>
+                    <option value="Recuperatorio">Recuperatorio</option>
+                    <option value="Entrega / TP">Entrega / TP</option>
+                    <option value="Final">Final</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" id="inputFechaEval" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Descripción / Tema (Opcional)</label>
+            <input type="text" id="inputNotaEval" placeholder="Ej: Unidades 1 a 3">
+        </div>
+
+        <div class="form-acciones">
+            <button type="submit" class="btn-guardar">+ Registrar Evaluación</button>
+        </div>
+    </form>
+
     <div class="lista-horarios-administrar">
-        <h3>// MIS CLASES CARGADAS</h3>
+        <h3 id="tituloListaAdmin">// MIS CLASES CARGADAS</h3>
         <div id="contenedorListaHorarios"></div>
     </div>
   </div>
 
-  <!-- OVERLAY Y PANEL DE DETALLE DE MATERIAS -->
   <div class="detail-overlay" id="overlay" onclick="closeDetail()"></div>
   <div class="detail-panel" id="detailPanel">
     <button class="close-btn" onclick="closeDetail()">✕</button>

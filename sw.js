@@ -1,4 +1,4 @@
-const CACHE_NAME = 'undec-dw-v2'; // <--- Al cambiar esto, el celular detecta la actualización
+const CACHE_NAME = 'undec-dw-v3';
 const ASSETS = [
   './',
   './index.html',
