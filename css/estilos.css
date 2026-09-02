@@ -1490,7 +1490,7 @@
 
   /* --- 3. PANTALLA HORARIOS Y CALENDARIO --- */
   #pantallaHorarios {
-    padding: 20px 10px;
+    padding: 20px 8px;
   }
 
   #pantallaHorarios .volver-btn,
@@ -1512,7 +1512,7 @@
   }
 
   .encabezado-horarios h1 {
-    font-size: 22px;
+    font-size: 20px !important;
     margin: 8px 0;
   }
 
@@ -1527,12 +1527,12 @@
   }
 
   .boton-editar-horarios {
-    width: 100%;
+    width: 100% !important;
     max-width: 250px;
-    margin: 10px auto 20px auto;
+    margin: 15px auto 20px auto !important;
   }
 
-  /* FIX OCULTAR/MOSTRAR AGENDA SEMANAL EN MOBILE */
+  /* OCULTAR / MOSTRAR AGENDA SEMANAL EN MOBILE */
   #agendaSemanal {
     display: flex;
     flex-direction: column;
@@ -1541,7 +1541,6 @@
     overflow-x: hidden;
   }
 
-  /* Muestra la agenda semanal solo cuando no está oculta por JS */
   #agendaSemanal[style*="display: none"] {
     display: none !important;
   }
@@ -1560,38 +1559,66 @@
     gap: 10px;
   }
 
-  /* AJUSTE DEL CALENDARIO MENSUAL EN MOBILE */
+  /* FIX CALENDARIO MENSUAL COMPACTO */
   #vistaCalendario {
-    padding: 10px 6px;
+    padding: 10px 4px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .calendario-header h2 {
+    font-size: 15px !important;
   }
 
   .calendario-dias-semana {
-    font-size: 10px;
+    font-size: 10px !important;
+    margin-bottom: 6px !important;
   }
 
   .calendario-grid {
-    gap: 3px;
+    gap: 2px !important;
   }
 
   .cal-dia {
-    min-height: 60px;
-    padding: 4px 2px;
+    min-height: 65px !important;
+    padding: 2px !important;
+    border-radius: 4px !important;
   }
 
   .cal-num-dia {
-    font-size: 10px;
+    font-size: 9px !important;
+    margin-bottom: 2px !important;
   }
 
   .cal-evento {
-    font-size: 8px;
-    padding: 1px 2px;
+    font-size: 7.5px !important;
+    line-height: 1.1 !important;
+    padding: 2px 1px !important;
+    margin-bottom: 2px !important;
+    border-left-width: 2px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
   }
 
-  /* FIX MODAL / POPUP ADMINISTRAR EN MOBILE */
+  .cal-evento.evaluacion {
+    font-size: 8px !important;
+  }
+
+  /* FIX CENTRADO DE POPUP / MODAL EN MOBILE */
   .panel-edicion-horarios {
-    width: 95vw !important;
+    width: 92vw !important;
+    max-width: 380px !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
     padding: 20px 15px !important;
     max-height: 85vh !important;
+    box-shadow: 0 0 40px rgba(0,0,0,0.9) !important;
+  }
+
+  .panel-edicion-horarios.visible {
+    transform: translate(-50%, -50%) scale(1) !important;
   }
 
   .tabs-admin {
@@ -1608,6 +1635,12 @@
 
   .form-row {
     grid-template-columns: 1fr !important;
-    gap: 0;
+    gap: 0 !important;
+  }
+
+  .form-group input,
+  .form-group select {
+    font-size: 14px !important;
+    padding: 10px !important;
   }
 }
