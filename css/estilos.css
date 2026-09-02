@@ -1404,8 +1404,8 @@
   margin-top: 4px;
 }
 
-  /* ==========================================
-   ADAPTACIÓN MOBILE (CONSOLIDADO)
+/* ==========================================
+   ADAPTACIÓN MOBILE (CORREGIDO)
    ========================================== */
 @media (max-width: 600px) {
 
@@ -1428,7 +1428,6 @@
     text-align: center;
     margin-bottom: 25px;
   }
-
 
   /* --- 2. PANTALLA MATERIAS --- */
   #mapaMaterias header {
@@ -1458,16 +1457,15 @@
     max-width: 200px;
   }
 
-  /* Liberar ancho mínimo de la grilla */
   .map-container {
     padding: 15px 10px;
-    overflow-x: hidden; /* Elimina scroll horizontal sobrante */
+    overflow-x: hidden;
   }
 
   .years-grid {
     display: flex !important;
     flex-direction: column !important;
-    min-width: 0 !important; /* IMPORTANTE: Quita los 600px rígidos de escritorio */
+    min-width: 0 !important;
     width: 100% !important;
     gap: 20px;
   }
@@ -1490,13 +1488,11 @@
     gap: 10px;
   }
 
-
-  /* --- 3. PANTALLA HORARIOS --- */
+  /* --- 3. PANTALLA HORARIOS Y CALENDARIO --- */
   #pantallaHorarios {
-    padding: 20px 15px;
+    padding: 20px 10px;
   }
 
-  /* Botones superiores paralelos */
   #pantallaHorarios .volver-btn,
   #pantallaHorarios .cerrarSesion {
     position: static !important;
@@ -1516,17 +1512,18 @@
   }
 
   .encabezado-horarios h1 {
-    font-size: 24px;
+    font-size: 22px;
     margin: 8px 0;
   }
 
-  .encabezado-horarios .tag {
-    font-size: 10px;
+  .vista-selector {
+    width: 100%;
   }
 
-  .encabezado-horarios .subtitle {
-    font-size: 11px;
-    margin-bottom: 15px;
+  .btn-vista {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 10px;
   }
 
   .boton-editar-horarios {
@@ -1535,26 +1532,82 @@
     margin: 10px auto 20px auto;
   }
 
-  /* Apilar columnas de días verticalmente */
+  /* FIX OCULTAR/MOSTRAR AGENDA SEMANAL EN MOBILE */
   #agendaSemanal {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     gap: 15px;
-    overflow-x: hidden; /* Evita scroll horizontal innecesario */
+    overflow-x: hidden;
+  }
+
+  /* Muestra la agenda semanal solo cuando no está oculta por JS */
+  #agendaSemanal[style*="display: none"] {
+    display: none !important;
   }
 
   .columna-dia {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
   }
 
   .dia-contenido {
-    min-height: auto !important; /* Quita los 500px vacíos en celus */
+    min-height: auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+  }
+
+  /* AJUSTE DEL CALENDARIO MENSUAL EN MOBILE */
+  #vistaCalendario {
+    padding: 10px 6px;
+  }
+
+  .calendario-dias-semana {
+    font-size: 10px;
+  }
+
+  .calendario-grid {
+    gap: 3px;
+  }
+
+  .cal-dia {
+    min-height: 60px;
+    padding: 4px 2px;
+  }
+
+  .cal-num-dia {
+    font-size: 10px;
+  }
+
+  .cal-evento {
+    font-size: 8px;
+    padding: 1px 2px;
+  }
+
+  /* FIX MODAL / POPUP ADMINISTRAR EN MOBILE */
+  .panel-edicion-horarios {
+    width: 95vw !important;
+    padding: 20px 15px !important;
+    max-height: 85vh !important;
+  }
+
+  .tabs-admin {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    font-size: 9px;
+    padding: 8px 4px;
+    text-align: center;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 0;
   }
 }

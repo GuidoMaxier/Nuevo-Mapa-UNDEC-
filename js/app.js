@@ -573,12 +573,12 @@ function cambiarVistaHorarios(vista) {
   const btnCal = document.getElementById("btnVistaCalendario");
 
   if (vista === 'agenda') {
-    if (agenda) agenda.style.display = "grid";
+    if (agenda) agenda.style.setProperty("display", "flex", "important");
     if (calendario) calendario.style.display = "none";
     if (btnAgenda) btnAgenda.classList.add("active");
     if (btnCal) btnCal.classList.remove("active");
   } else {
-    if (agenda) agenda.style.display = "none";
+    if (agenda) agenda.style.setProperty("display", "none", "important");
     if (calendario) calendario.style.display = "block";
     if (btnAgenda) btnAgenda.classList.remove("active");
     if (btnCal) btnCal.classList.add("active");
