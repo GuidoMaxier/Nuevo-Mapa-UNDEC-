@@ -1,12 +1,36 @@
 // horarios.js — agenda semanal, calendario, evaluaciones y panel de administración
+const DIAS_SEMANA = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+
 let fechaCalendario = new Date();
 let tabAdminActiva = 'horarios';
 
+// Construye las columnas de la agenda semanal (una por día hábil)
+function construirAgendaSemanal() {
+  const agenda = document.getElementById("agendaSemanal");
+  if (!agenda || agenda.querySelector(".columna-dia")) return;
+
+  DIAS_SEMANA.forEach(dia => {
+    const columna = document.createElement("div");
+    columna.className = "columna-dia";
+
+    const header = document.createElement("div");
+    header.className = "dia-header";
+    header.textContent = dia;
+
+    const contenido = document.createElement("div");
+    contenido.className = "dia-contenido";
+    contenido.setAttribute("data-dia", dia);
+
+    columna.appendChild(header);
+    columna.appendChild(contenido);
+    agenda.appendChild(columna);
+  });
+}
+
 function mostrarHorarios() {
   if (!estudiante) return;
-  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
-  dias.forEach(dia => {
+  DIAS_SEMANA.forEach(dia => {
     const contenedor = document.querySelector(`.dia-contenido[data-dia="${dia}"]`);
     if (!contenedor) return;
 

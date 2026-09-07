@@ -44,6 +44,7 @@ function entrarHorarios() {
   document.getElementById("menuPrincipal").style.display = "none";
   document.getElementById("pantallaHorarios").style.display = "block";
 
+  construirAgendaSemanal();
   mostrarHorarios();
   renderizarCalendario();
 }
