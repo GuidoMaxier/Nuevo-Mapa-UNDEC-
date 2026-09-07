@@ -39,11 +39,21 @@ subjects.forEach(s => {
 
 function getSubject(id) { return subjects.find(s => s.id === id); }
 
+// Escapa texto de usuario antes de insertarlo en HTML (defensa contra XSS/roturas)
+function esc(value) {
+  return String(value).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
+
 const yearColors  = { 1: 'y1', 2: 'y2' };
 const yearAccents = { 1: '#00d4ff', 2: '#00ff9d' };
 
 let estudiante = null;
-let modoEdicionHorarios = false;
 let activeId = null;
 let fechaCalendario = new Date();
 let tabAdminActiva = 'horarios';
@@ -112,9 +122,9 @@ function mostrarHorarios() {
       clase.className = "clase-agenda";
 
       clase.innerHTML = `
-        <div class="clase-hora">${horario.inicio} — ${horario.fin}</div>
-        <div class="clase-materia">${horario.materia}</div>
-        <div class="clase-modalidad">${horario.modalidad}</div>
+        <div class="clase-hora">${esc(horario.inicio)} — ${esc(horario.fin)}</div>
+        <div class="clase-materia">${esc(horario.materia)}</div>
+        <div class="clase-modalidad">${esc(horario.modalidad)}</div>
       `;
 
       const materia = subjects.find(subject => subject.name === horario.materia);
@@ -409,8 +419,8 @@ function renderizarListaHorariosAdmin() {
     div.className = "item-horario-admin";
     div.innerHTML = `
       <div class="item-horario-info">
-        <span class="item-horario-titulo">${item.materia}</span>
-        <span class="item-horario-sub">${item.dia} | ${item.inicio} - ${item.fin} | ${item.modalidad}</span>
+        <span class="item-horario-titulo">${esc(item.materia)}</span>
+        <span class="item-horario-sub">${esc(item.dia)} | ${esc(item.inicio)} - ${esc(item.fin)} | ${esc(item.modalidad)}</span>
       </div>
       <div class="item-horario-acciones">
         <button class="btn-item-edit" onclick="cargarHorarioParaEditar(${index})">✎</button>
@@ -546,8 +556,8 @@ function renderizarListaEvaluacionesAdmin() {
     div.className = "item-horario-admin";
     div.innerHTML = `
       <div class="item-horario-info">
-        <span class="item-horario-titulo">${item.tipo}: ${item.materia}</span>
-        <span class="item-horario-sub">Fecha: ${item.fecha} ${item.nota ? '| ' + item.nota : ''}</span>
+        <span class="item-horario-titulo">${esc(item.tipo)}: ${esc(item.materia)}</span>
+        <span class="item-horario-sub">Fecha: ${esc(item.fecha)}${item.nota ? ' | ' + esc(item.nota) : ''}</span>
       </div>
       <div class="item-horario-acciones">
         <button class="btn-item-del" onclick="eliminarEvaluacionDirecto(${index})">🗑</button>
@@ -567,27 +577,26 @@ function eliminarEvaluacionDirecto(index) {
 }
 
 function cambiarVistaHorarios(vista) {
-  const agenda = document.getElementById("agendaSemanal");
-  const calendario = document.getElementById("vistaCalendario");
+  const contenedor = document.getElementById("pantallaHorarios");
+  if (!contenedor) return;
+
+  const esCalendario = vista === 'calendario';
+  contenedor.classList.toggle('vista-calendario-activa', esCalendario);
+
   const btnAgenda = document.getElementById("btnVistaAgenda");
   const btnCal = document.getElementById("btnVistaCalendario");
+  if (btnAgenda) btnAgenda.classList.toggle("active", !esCalendario);
+  if (btnCal) btnCal.classList.toggle("active", esCalendario);
 
-  if (vista === 'agenda') {
-    if (agenda) agenda.style.setProperty("display", "flex", "important");
-    if (calendario) calendario.style.display = "none";
-    if (btnAgenda) btnAgenda.classList.add("active");
-    if (btnCal) btnCal.classList.remove("active");
-  } else {
-    if (agenda) agenda.style.setProperty("display", "none", "important");
-    if (calendario) calendario.style.display = "block";
-    if (btnAgenda) btnAgenda.classList.remove("active");
-    if (btnCal) btnCal.classList.add("active");
-    renderizarCalendario();
-  }
+  if (esCalendario) renderizarCalendario();
 }
 
 function cambiarMes(delta) {
-  fechaCalendario.setMonth(fechaCalendario.getMonth() + delta);
+  fechaCalendario = new Date(
+    fechaCalendario.getFullYear(),
+    fechaCalendario.getMonth() + delta,
+    1
+  );
   renderizarCalendario();
 }
 

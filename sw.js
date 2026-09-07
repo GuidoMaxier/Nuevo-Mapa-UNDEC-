@@ -1,10 +1,12 @@
-const CACHE_NAME = 'undec-dw-v3';
+const CACHE_NAME = 'undec-dw-v4';
 const ASSETS = [
   './',
   './index.html',
   './css/estilos.css',
   './js/app.js',
-  './manifest.json'
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
