@@ -88,6 +88,26 @@ manifest.json         # PWA
 
 ---
 
+## 🟢 Sobre el deploy de Vercel (por qué a veces hay una "X roja")
+
+El sitio publicado está en **[https://nuevo-mapa-undec.vercel.app](https://nuevo-mapa-undec.vercel.app)**. Es una app **100 % estática** desplegada desde una **cuenta gratuita de Vercel (plan Hobby)** que pertenece al **autor/dueño del proyecto** (Natanael Valdovinos); el deploy está conectado a **su** repositorio original, no a los forks.
+
+Si en tu PR o en el panel de GitHub ves un check de **Vercel en rojo (X)**, **NO significa que tu código esté mal**. Causas habituales:
+
+1. **El proyecto de Vercel apunta al repo original, no a tu fork.** Cuando un PR viene de un fork, el check de Vercel del repo original suele quedar fallido/pendiente porque el deploy pertenece a otra cuenta que no tiene acceso a tu fork. Es esperable: no hay que tocarlo.
+2. **Preset de framework incorrecto en Vercel.** Al ser un sitio sin build, si el proyecto está configurado con un preset que espera un comando de build o una carpeta de salida (ej. Vite/Next), Vercel marca el deploy como fallido porque no hay nada que construir. La config correcta es **framework: "Other"** (sin build), sirviendo la **root** del repo. En el sitio del dueño ya está resuelto; si lo ves en tu propia cuenta, esa es la causa típica.
+3. **No hay `vercel.json` ni comando de build.** Vercel no sabe qué construir → `Build failed`. Para un proyecto estático no hace falta: se sirve tal cual.
+
+**Qué hacer:**
+
+- **No intentes arreglar el check rojo en un fork**: la publicación real la hace el dueño desde su cuenta (así como ya ocurre con cada cambio en su repo). El check de Vercel no bloquea el merge manual ni afecta el sitio ya publicado.
+- Si querés ver **tu propia preview**, importá el repo a Vercel con **tu cuenta gratuita** (botón *Deploy* a la derecha del repo), elegí framework **Other**, y ahí sí verás tus propios deployments (verde = OK, rojo = falló tu config).
+- La validación **real** del código acá es local: `node --check js/*.js` + el checklist de pruebas manuales del PR. Si eso pasa, aunque Vercel muestre una X en un fork, tu cambio está bien.
+
+> **En resumen:** la "X roja" de Vercel casi siempre es un tema de config de cuenta/fork, **nunca** un veredicto sobre tu código.
+
+---
+
 ## 🧪 Cómo probar (no hay tests automatizados)
 
 La app es estática: abrí `index.html` en el navegador (o `npx serve .` / cualquier servidor estático). Para el Service Worker usá `localhost` o HTTPS.

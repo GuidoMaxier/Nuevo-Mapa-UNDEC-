@@ -99,6 +99,8 @@ Nuevo-Mapa-UNDEC-/
 2. **No hace falta configurar nada**: al no haber build ni framework, Vercel sirve el contenido del directorio raíz tal cual (framework: *Other*).
 3. Cada push a `main` se despliega solo.
 
+> 💡 El sitio ya publicado está en **[nuevo-mapa-undec.vercel.app](https://nuevo-mapa-undec.vercel.app)** (cuenta gratuita del autor). Si en un PR de un fork ves el check de Vercel en **rojo**, no te asustes: es normal y casi siempre es config de cuenta/fork, no un problema del código. Detalles en la sección "Sobre el deploy de Vercel" de [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ---
 
 ## 🤝 Contribuciones y reportes
