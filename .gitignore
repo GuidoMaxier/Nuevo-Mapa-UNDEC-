@@ -1,0 +1,23 @@
+# Carpeta de la herramienta de asistencia (solo local del autor, no se comparte)
+.reasonix/
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Editores / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Dependencias / build (por si algún día se agregan)
+node_modules/
+dist/
+
+# Variables de entorno
+.env
+.env.local
+
+# Logs
+*.log
