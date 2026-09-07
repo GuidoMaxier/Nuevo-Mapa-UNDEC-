@@ -1,0 +1,179 @@
+/* login-menu.css — login, selección de usuario y menú principal */
+    #pantallaLogin {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      position: fixed;
+      inset: 0;
+    }
+
+    #loginCard {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      width: min(420px, 90vw);
+      box-shadow: 0 0 60px rgba(0,212,255,0.1);
+      text-align: center;
+    }
+
+    #loginCard h1 { font-size: 28px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 40px rgba(0,212,255,0.4); margin: 10px 0; }
+    #loginCard h1 span { color: var(--accent); }
+
+    .login-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-bottom: 30px; }
+
+    .login-field { text-align: left; margin-bottom: 16px; }
+
+    .login-field label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+
+    .login-field input {
+      width: 100%;
+      background: rgba(0,212,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: 'Exo 2', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .login-field input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(0,212,255,0.1); }
+
+    #loginBtn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #loginBtn:hover { background: rgba(0,212,255,0.2); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+
+    .cerrarSesion {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cerrarSesion:hover { background: rgba(0,212,255,0.2); color: #fff; border-color: var(--accent); }
+
+    .usuario-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(0,212,255,0.1);
+      border: 2px solid var(--accent2);
+      border-radius: 6px;
+      color: var(--accent2);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .usuario-btn:hover { background: rgba(0,212,255,0.2); color: #fff; }
+
+    #yaTengoBtn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+  #menuPrincipal {
+    display: none;
+    min-height: 100vh;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+  }
+
+#menuPrincipal h2 {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+.opciones-menu {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+.opcion-menu {
+    width: 260px;
+    height: 220px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+  }
+
+.opcion-menu:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.12);
+  }
+
+.icono-opcion {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+
+.opcion-menu h3 {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+

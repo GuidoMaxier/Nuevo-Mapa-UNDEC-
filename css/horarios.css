@@ -1,0 +1,589 @@
+/* horarios.css — agenda semanal, calendario, evaluaciones y administración */
+  #pantallaHorarios {
+    display: none;
+    min-height: 100vh;
+    padding: 40px;
+  }
+
+  .volver-btn {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .volver-btn:hover { background: rgba(0,212,255,0.2); color: #fff; border-color: var(--accent); }
+
+  .encabezado-horarios {
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+.encabezado-horarios h1 {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+  }
+
+.encabezado-horarios h1 span {
+    color: var(--accent);
+  }
+
+#agendaSemanal {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+  }
+
+.columna-dia {
+    min-width: 0;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    overflow: hidden;
+  }
+
+.dia-header {
+    padding: 14px 10px;
+
+    text-align: center;
+
+    background: rgba(0, 212, 255, 0.06);
+    border-bottom: 1px solid var(--border);
+
+    color: var(--accent);
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+.dia-contenido {
+    min-height: 500px;
+    padding: 10px;
+  }
+
+  .clase-agenda {
+    padding: 14px 12px;
+    margin-bottom: 10px;
+
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 8px;
+
+    background: rgba(0, 212, 255, 0.05);
+
+    transition: all 0.2s ease;
+
+    cursor: pointer;
+    position: relative;
+  }
+
+.clase-agenda:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--accent);
+
+    background: rgba(0, 212, 255, 0.10);
+
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
+  }
+
+.clase-hora {
+    margin-bottom: 8px;
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+
+    color: var(--accent);
+  }
+
+  .clase-agenda::after {
+    content: "VER DETALLE →";
+
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+
+    color: var(--muted);
+
+    opacity: 0;
+    transition: opacity 0.2s;
+  } 
+
+.clase-agenda:hover::after {
+    opacity: 1;
+  }
+
+.clase-materia {
+    color: #e0f0ff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    line-height: 1.3;
+
+    margin-bottom: 10px;
+  }
+
+.clase-modalidad {
+    display: inline-block;
+
+    padding: 3px 7px;
+
+    border: 1px solid rgba(0, 255, 157, 0.3);
+    border-radius: 4px;
+
+    background: rgba(0, 255, 157, 0.08);
+
+    color: var(--accent2);
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .dia-vacio {
+    padding: 40px 10px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-family: 'Share Tech Mono', monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    opacity: 0.7;
+  }
+
+  .boton-editar-horarios {
+    display: block;
+    margin: 0 auto 30px auto;
+    margin-top: 20px;
+
+    padding: 10px 20px;
+
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid var(--accent);
+
+    border-radius: 6px;
+
+    color: var(--accent);
+
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+  }
+
+.boton-editar-horarios:hover {
+    background: rgba(0, 212, 255, 0.18);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+  }
+
+   /* --- PANEL EDICIÓN DE HORARIOS --- */
+.panel-edicion-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.panel-edicion-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.panel-edicion-horarios {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 1000;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 30px;
+  width: min(520px, 92vw);
+  box-shadow: 0 0 60px rgba(0, 212, 255, 0.2), 0 0 120px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.panel-edicion-horarios.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.panel-edicion-horarios h2 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  background: rgba(0, 212, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #fff;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group select option {
+  background: var(--panel);
+  color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+}
+
+.form-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-guardar {
+  flex: 1;
+  padding: 12px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-guardar:hover {
+  background: rgba(0, 212, 255, 0.25);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
+.btn-cancelar {
+  padding: 12px 16px;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid var(--warn);
+  border-radius: 6px;
+  color: var(--warn);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.lista-horarios-administrar {
+  margin-top: 30px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.lista-horarios-administrar h3 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.item-horario-admin {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  gap: 10px;
+}
+
+.item-horario-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-horario-titulo {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.item-horario-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.item-horario-acciones {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-item-edit, .btn-item-del {
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.btn-item-edit {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-item-del {
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid var(--warn);
+  color: var(--warn);
+}
+
+/* --- COMPONENTES DEL CALENDARIO --- */
+.vista-selector {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.btn-vista {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.btn-vista.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+#vistaCalendario {
+  display: none;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Vista semanal por defecto; al activar el calendario se oculta la agenda */
+#pantallaHorarios.vista-calendario-activa #agendaSemanal { display: none; }
+#pantallaHorarios.vista-calendario-activa #vistaCalendario { display: block; }
+
+.calendario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendario-header h2 {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent);
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.calendario-header button {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.calendario-dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cal-dia {
+  min-height: 85px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-dia.fuera-mes {
+  opacity: 0.2;
+}
+
+.cal-dia.hoy {
+  border-color: var(--accent);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.cal-num-dia {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.cal-dia.hoy .cal-num-dia {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.cal-evento {
+  font-size: 9px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: rgba(0, 212, 255, 0.15);
+  border-left: 2px solid var(--accent);
+  color: #fff;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- PESTAÑAS DE ADMINISTRACIÓN --- */
+.tabs-admin {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.tab-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* --- ESTILOS DE EVALUACIONES EN CALENDARIO Y LISTAS --- */
+.cal-evento.evaluacion {
+  background: rgba(255, 107, 53, 0.2) !important;
+  border-left: 2px solid var(--warn) !important;
+  color: #ffaa88 !important;
+  font-weight: bold;
+}
+

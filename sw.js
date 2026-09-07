@@ -1,9 +1,18 @@
-const CACHE_NAME = 'undec-dw-v4';
+const CACHE_NAME = 'undec-dw-v5';
 const ASSETS = [
   './',
   './index.html',
-  './css/estilos.css',
-  './js/app.js',
+  './css/base.css',
+  './css/login-menu.css',
+  './css/mapa.css',
+  './css/horarios.css',
+  './css/responsive.css',
+  './js/utils.js',
+  './js/data.js',
+  './js/storage.js',
+  './js/mapa.js',
+  './js/horarios.js',
+  './js/main.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png'
