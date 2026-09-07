@@ -1,0 +1,87 @@
+name: 🐛 Reporte de error
+description: Reportá un bug para que podamos reproducirlo y corregirlo
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar 🙌. Antes de continuar: probá recargar la app (o reinstalarla si es PWA) por si se trata de caché del Service Worker.
+  - type: checkboxes
+    id: verificacion
+    attributes:
+      label: Verificación previa
+      options:
+        - label: Revisé que no exista ya un issue abierto con este mismo problema
+          required: true
+        - label: Probé recargar la página / limpiar caché y el error persiste
+  - type: dropdown
+    id: area
+    attributes:
+      label: ¿En qué parte de la app ocurre?
+      multiple: true
+      options:
+        - Mapa de correlativas
+        - Estados de materias
+        - Agenda semanal
+        - Calendario
+        - Evaluaciones
+        - Login / registro / cambio de usuario
+        - PWA (instalación, offline, Service Worker)
+        - Otra
+    validations:
+      required: true
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción del problema
+      description: Explicá qué pasa de forma clara y concisa.
+      placeholder: "Ej: al marcar una materia como aprobada el contador no se actualiza…"
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducirlo
+      description: El detalle ayuda a encontrar el error más rápido.
+      placeholder: |
+        1. Entrar a Materias
+        2. Hacer clic en "Bases de Datos I - Relacional"
+        3. Marcar como Aprobada
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Comportamiento esperado
+      placeholder: "Qué debería pasar…"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+      placeholder: "Qué pasa realmente…"
+    validations:
+      required: true
+  - type: input
+    id: entorno
+    attributes:
+      label: Entorno
+      description: Dispositivo, navegador y versión, orientación (si aplica).
+      placeholder: "Ej: Celular Android, Chrome 128, vertical"
+    validations:
+      required: true
+  - type: textarea
+    id: capturas
+    attributes:
+      label: Capturas o video (opcional)
+      description: Pegá imágenes o un enlace a un video corto que ayude a entender el problema.
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **Privacidad:** los datos de los alumnos se guardan en el `localStorage` del navegador. No publiques nombres reales de otras personas: usá datos de ejemplo ("Nombre Test").

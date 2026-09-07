@@ -1,0 +1,56 @@
+name: 💡 Solicitud de función o mejora
+description: Proponé una idea, mejora o ajuste para la app
+title: "[Mejora] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Buenísimo que quieras mejorar la app! Contanos qué te gustaría sumar y por qué. Si además querés implementarlo vos, avisalo y te guiamos en [CONTRIBUTING.md](../../CONTRIBUTING.md).
+  - type: dropdown
+    id: area
+    attributes:
+      label: ¿Qué área toca la idea?
+      multiple: true
+      options:
+        - Mapa de correlativas
+        - Estados de materias
+        - Agenda semanal
+        - Calendario
+        - Evaluaciones
+        - Login / usuarios
+        - PWA / offline
+        - Diseño / visual
+        - Otra
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Descripción de la idea
+      description: ¿Qué querés que la app pueda hacer?
+      placeholder: "Ej: poder exportar el calendario de evaluaciones a un archivo…"
+    validations:
+      required: true
+  - type: textarea
+    id: motivo
+    attributes:
+      label: ¿Para qué la usarías?
+      description: El contexto ayuda a priorizar. Contanos en qué situación te sirve.
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: ¿Cómo la imaginás?
+      description: Podés proponer dónde iría (menú, calendario, detalle de materia…), cómo se vería o cómo funcionaría. Sin código está perfecto, pero si tenés una idea técnica, mejor.
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: Alternativas que ya probaste (opcional)
+      description: ¿Hay alguna forma de lograrlo hoy, o con otra herramienta?
+  - type: checkboxes
+    id: oferta
+    attributes:
+      label: ¿Querés sumarte?
+      options:
+        - label: Me interesa implementarlo yo (haría un PR)
+        - label: Solo dejo la idea para quien pueda tomarla

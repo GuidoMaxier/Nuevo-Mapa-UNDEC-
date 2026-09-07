@@ -101,6 +101,16 @@ Nuevo-Mapa-UNDEC-/
 
 ---
 
+## 🤝 Contribuciones y reportes
+
+¿Encontraste un bug, querés sugerir una función o aportar código? ¡Todo suma!
+
+- **Reportar un error o pedir una mejora**: abrí un [issue](https://github.com/GuidoMaxier/Nuevo-Mapa-UNDEC-/issues/new/choose) con la plantilla correspondiente (🐛 *Reporte de error* o 💡 *Solicitud de función*). Es el canal ideal también para que futuros técnicos en desarrollo de software practiquen el flujo real: *reportar → reproducir → corregir → PR*.
+- **Escribir código**: leé [CONTRIBUTING.md](./CONTRIBUTING.md) — explica el flujo fork → rama → PR, las convenciones del proyecto y cómo probar sin romper nada.
+- La app es pública en GitHub; los issues requieren una **cuenta de GitHub** (gratuita).
+
+---
+
 ## Créditos
 
 - **Autor original y desarrollador principal:** [**Natanael Valdovinos**](https://github.com/zzzNata) ([`zzzNata`](https://github.com/zzzNata)) — estudiante de la Tecnicatura en Desarrollo Web de la **UNdeC**. Creó y desarrolló el proyecto desde agosto de 2026.

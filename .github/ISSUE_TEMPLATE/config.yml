@@ -1,0 +1,4 @@
+# Configuración de la página "Nuevo issue".
+# blank_issues_enabled: true = además de las plantillas (bug/mejora), se puede
+# abrir un issue en blanco para dudas generales o temas que no entren en las otras.
+blank_issues_enabled: true
